@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Diabetes Calculator"
+            android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Average Glucose"
+            android:id="@+id/textView2"/>
+    <EditText
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@id/averageGlucose" android:background="@android:color/darker_gray"
+            android:imeOptions="actionDone"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="A1C Score"
+            android:id="@+id/textView3"/>
+    <EditText
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/a1c" android:background="@android:color/darker_gray"
+            android:imeOptions="actionDone"/>
+    <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="98dp">
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADAG Formula (eAG = (1.583 * A1c - 2.52) * 18.05)"
+                android:id="@+id/rdoADAG" android:checked="true"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DCCT Formula (eAG = (A1c *35.6) - 77.3)"
+                android:id="@+id/rdoDCCT" android:checked="false"/>
+    </RadioGroup>
+</LinearLayout>
