@@ -1,12 +1,11 @@
 package com.example.Android1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ public class MyActivity extends Activity {
   private EditText a1c;
   private RadioButton rdoADAG;
   private RadioButton rdoDCCT;
+  private Button btnSwitch;
 
   /**
    * Called when the activity is first created.
@@ -33,6 +33,7 @@ public class MyActivity extends Activity {
     a1c = (EditText) findViewById(R.id.a1c);
     rdoADAG = (RadioButton) findViewById(R.id.rdoADAG);
     rdoDCCT = (RadioButton) findViewById(R.id.rdoDCCT);
+    btnSwitch = (Button) findViewById(R.id.btnSwitch);
 
     // Event Handlers: onFocus
     averageGlucose.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -93,5 +94,12 @@ public class MyActivity extends Activity {
         return handled;
       }
     });
+    btnSwitch.setOnClickListener(new View.OnClickListener(){
+      public void onClick(View v){
+        Intent switchActivity = new Intent(v.getContext() ,SugarLogger.class);
+        startActivity(switchActivity);
+      }
+    }
+    );
   }
 }

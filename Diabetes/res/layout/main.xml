@@ -50,4 +50,9 @@
                 android:text="DCCT Formula (eAG = (A1c *35.6) - 77.3)"
                 android:id="@+id/rdoDCCT" android:checked="false"/>
     </RadioGroup>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to Sugar Log"
+            android:id="@+id/btnSwitch"/>
 </LinearLayout>
