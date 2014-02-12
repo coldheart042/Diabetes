@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" android:background="#ffffff">
+              android:orientation="vertical" android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Set the date range"/>
+
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content" android:weightSum="1">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Begin" android:padding="5dip"/>
+        <Spinner
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnBegin" android:layout_weight="1.02" android:clickable="true"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="End" android:padding="5dip"/>
+        <Spinner
+                android:layout_width="238dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnEnd"/>
+        <Button android:id="@+id/btnSubmit" android:text="Submit"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:enabled="true"/>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/chart" android:orientation="horizontal"
+                  android:layout_width="fill_parent" android:layout_height="0dip" android:layout_weight="1"/>
 
 </LinearLayout>

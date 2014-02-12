@@ -2,141 +2,150 @@ package com.example.Android1;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.*;
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.model.XYSeries;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+import org.achartengine.renderer.XYSeriesRenderer;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Scanner;
 
 /**
  * Created by Richard on 2/5/14.
  */
 public class SugarChart extends Activity {
-  Paint paint;
+
+  ArrayList<Integer> bs = new ArrayList<Integer>();
+  ArrayList<String> date = new ArrayList<String>();
+  private GraphicalView mChart;
+  private XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
+  private XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
+  private XYSeries mCurrentSeries;
+  private XYSeriesRenderer mCurrentRenderer;
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    readLog();
     setContentView(R.layout.chart);
-//    requestWindowFeature(Window.FEATURE_NO_TITLE);
     initializeView();
   }
 
+  private void initChart(){
+    mCurrentSeries = new XYSeries( "BS");
+    mDataset.addSeries(mCurrentSeries);
+    mCurrentRenderer = new XYSeriesRenderer();
+    mRenderer.addSeriesRenderer( mCurrentRenderer);
 
-  public void initializeView(){
-    paint = new Paint();
-    paint.setColor(Color.BLACK);
-    paint.setStrokeWidth( 1 );
-    setContentView( new Panel(this) );
+    mRenderer.setAxisTitleTextSize( 24 );
+    mRenderer.setLabelsTextSize( 24 );
+    mRenderer.setChartTitleTextSize( 48 );
   }
 
-  public ArrayList<String> logSplitter(){
-    ArrayList<String> result = new ArrayList<String>();
-    File f = new File("sugar_log.csv");
+  private void initializeView(){
+    Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
+    Spinner spnBegin = (Spinner) findViewById(R.id.spnBegin);
+    Spinner spnEnd = (Spinner) findViewById(R.id.spnEnd);
 
-    try{
-      FileInputStream fis = new FileInputStream(f);
-      BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+    // Populate the spinners with data
+    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,date);
+    spnBegin.setAdapter(spinnerArrayAdapter);
+    spnEnd.setAdapter(spinnerArrayAdapter);
 
-      String line = null;
-      while ((line = br.readLine()) != null){ //Sets variable AND checks if null - cool, huh?
-        result.add(line);
+    btnSubmit.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // Find & remove the current graph and all associated data
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+        if(mChart != null){
+          layout.removeAllViews();
+          mCurrentSeries.clear();
+          initChart();
+          refactorData();
+          mChart = ChartFactory.getCubeLineChartView( SugarChart.this, mDataset, mRenderer, 0.3f);
+          layout.addView(mChart);
+        }
       }
+    });
 
-    } catch (Exception e){
-      Toast.makeText(SugarChart.this, "Failed to load file.", Toast.LENGTH_SHORT).show();
-    }
 
-    return result;
   }
 
-  class Panel extends View {
-    public Panel(Context context){
-      super(context);
+  private void addData(){
+    Integer x = 0;
+    for(Integer sugar : bs) {
+      mCurrentSeries.add(x += 1, sugar);
     }
+  }
 
-    @Override
-    public void onDraw( Canvas canvas){
-      canvas.drawColor(Color.WHITE);
+  private void refactorData(){
+    Spinner spnBegin = (Spinner) findViewById(R.id.spnBegin);
+    Spinner spnEnd = (Spinner) findViewById(R.id.spnEnd);
+    int begin = date.indexOf(spnBegin.getSelectedItem());
+    int ending = date.indexOf(spnEnd.getSelectedItem());
+    int x = 0;
+    while(begin <= ending){
+      mCurrentSeries.add(x += 1, bs.get(begin) );
+      begin++;
+    }
+  }
 
-      // Set center coordinates (0,0)
-      int centerX = 40, centerY = canvas.getHeight() - (canvas.getHeight() / 8);
-      drawGrid(canvas, centerX, centerY);
-      ArrayList<Integer> bs = getBS();
-      int size = bs.size();
-      if (size > 0){
-        ArrayList<Integer> placeholder;     // This needs to be set initially as point A
-        int diff = canvas.getWidth() / size;
 
-        /////////////// Iterates through Blood Sugar (bs) ArrayList \\\\\\\\\\\\\\\
-        for (int i = 0; i < size; i++){
-          // Generate xy of point A (ArrayList<Integer>(x,y))
-          // Generate xy of point B (ArrayList<Integer>(x,y))
-          // Set placeholder to point B
+  @Override
+  protected void onResume(){
+    super.onResume();
+    LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+    if(mChart == null){
+      initChart();
+      addData();
+      mChart = ChartFactory.getCubeLineChartView( this, mDataset, mRenderer, 0.3f);
+      layout.addView(mChart);
+    }else{
+      mChart.repaint();
+    }
+  }
+
+
+  public void readLog(){
+    String FILENAME = "sugar_log.csv";
+    FileInputStream inputStream = null;
+    String temp;
+    String a[];
+
+    try {
+      inputStream = openFileInput( FILENAME );
+      byte[] reader = new byte[inputStream.available()];
+      while ( inputStream.read(reader) != -1){}
+
+      Scanner s = new Scanner( new String(reader));
+      s.useDelimiter("\\n");
+      while(s.hasNext()){
+        temp = s.next();
+        a = temp.split(",");
+        bs.add(Integer.parseInt(a[4]));
+        date.add(a[0] + " " + a[1]);
+      }
+      s.close();
+    }catch(Exception e){
+      Log.e("Chart", e.getMessage());
+    }finally {
+      if(inputStream != null){
+        try {
+          inputStream.close();
+        }catch(IOException e){
+          Log.e("Chart", e.getMessage());
         }
       }
     }
-
-    /////////////// This sets up the graph \\\\\\\\\\\\\\\
-    public void drawGrid( Canvas canvas, int centerX, int centerY){
-      Paint axis = new Paint(Color.BLACK);
-      Paint marker = new Paint(Color.BLUE);
-
-      /////////////// Y- Axis \\\\\\\\\\\\\\\
-      canvas.drawLine(centerX, centerY, centerX, centerY - 800, axis); // Draws the Y-Axis
-      canvas.drawLine(centerX, centerY - 800, centerX + 10, centerY - 795, axis); // Y-Axis Arrow (Right)
-      canvas.drawLine(centerX, centerY - 800, centerX - 10, centerY - 795, axis); // Y-Axis Arrow (Left)
-      canvas.drawText("Blood Sugar (Rounded to nearest 5)", centerX, centerY - 810, axis);
-
-      /////////////// X- Axis \\\\\\\\\\\\\\\
-      canvas.drawLine(centerX, centerY, centerX + (canvas.getWidth() - 60),centerY, axis); // Draws the X-Axis
-      canvas.drawLine(centerX + (canvas.getWidth() - 60),centerY,centerX + (canvas.getWidth() - 70), centerY + 10, axis); // Draws the X-Axis Arrow (Bottom)
-      canvas.drawLine(centerX + (canvas.getWidth() - 60),centerY,centerX + (canvas.getWidth() - 70), centerY - 10, axis); // Draws the X-Axis Arrow (Top)
-
-      /////////////// Y-Axis Grid markers \\\\\\\\\\\\\\\
-      for(int i = 20; i < 800; i += 20){
-        String bs = String.valueOf((i / 4));
-        canvas.drawLine(centerX - 5, centerY - i, centerX + 5, centerY - i, marker);
-
-          Paint danger = new Paint(Color.RED);
-          canvas.drawText(bs, centerX - 30, (centerY -i)+5, danger);
-      }
   }
-
-    /////////////// This sets the array up \\\\\\\\\\\\\\\
-    public ArrayList<Integer> getBS(){
-      ArrayList<Integer> bs = new ArrayList<Integer>();
-      File f = new File("sugar_log.csv");
-      try{
-        FileInputStream fis = new FileInputStream(f);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-        String line;
-        while ( (line = br.readLine()) != null){
-          String[] rowData = line.split(",");
-          bs.add(Integer.parseInt(rowData[4]));
-        }
-      } catch (Exception e){
-        Toast.makeText(SugarChart.this, "Failed to load file.", Toast.LENGTH_SHORT).show();
-      }
-      return bs;
-    }
-
-    /////////////// This sets up the points and lines on the graph \\\\\\\\\\\\\\\
-    public ArrayList<Integer> plotPoints(Canvas canvas, ArrayList<Integer> pointA, ArrayList<Integer> pointB ){
-      // Draw Circle at pointA
-      // Draw Circle at pointB
-      // Draw Line from pointA to pointB
-      return pointB;
-    }
-  }
-
 }
