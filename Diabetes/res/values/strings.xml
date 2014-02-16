@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android1</string>
+    <string name="dia_calc">Diabetes Calculator</string>
+    <string name="avg_glu">Average Glucose</string>
+    <string name="a1c_score">A1C Score</string>
+    <string name="adag_form">ADAG Formula (eAG = (1.583 * A1c - 2.52) * 18.05)</string>
+    <string name="dcct_form">DCCT Formula (eAG = (A1c *35.6) - 77.3)</string>
+    <string name="go_sugar_log">Go to Sugar Log</string>
+    <string name="date">Date:</string>
+    <string name="time">Time:</string>
+    <string name="before_meal">Before Meal</string>
+    <string name="after_meal">After Meal</string>
+    <string name="notes">Notes</string>
+    <string name="bs_reading">Blood Sugar Reading:</string>
+    <string name="btn_Add">Add to Log</string>
+    <string name="back">Back</string>
+    <string name="show_chart">Show Chart</string>
+    <string name="set_date_range">Set the date range</string>
+    <string name="begin">Begin</string>
+    <string name="end">End</string>
+    <string name="submit">Submit</string>
+    <string name="success">Success!</string>
+    <string name="failure">Failed!</string>
 </resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android1</string>
+    <string name="dia_calc">Calculadora de la Diabetes</string>
+    <string name="avg_glu">glucosa Promedio</string>
+    <string name="a1c_score">Puntuación A1C</string>
+    <string name="adag_form">ADAG Fórmula (eAG = (1.583 * A1c - 2.52) * 18.05)</string>
+    <string name="dcct_form">DCCT Fórmula (eAG = (A1c *35.6) - 77.3)</string>
+    <string name="go_sugar_log">Ir al registro azúcar</string>
+    <string name="date">Fecha:</string>
+    <string name="time">Tiempo:</string>
+    <string name="before_meal">Antes de la comida</string>
+    <string name="after_meal">Después de la comida</string>
+    <string name="notes">Notas</string>
+    <string name="bs_reading">Lectura de azúcar en sangre:</string>
+    <string name="btn_Add">Añadir a registrar</string>
+    <string name="back">Volver</string>
+    <string name="show_chart">Mostrar el gráfico</string>
+    <string name="set_date_range">Ajuste el rango de fechas</string>
+    <string name="begin">Comenzar</string>
+    <string name="end">Final</string>
+    <string name="submit">Presentar</string>
+    <string name="success">éxito!</string>
+    <string name="failure">Fracasado!</string>
+</resources>

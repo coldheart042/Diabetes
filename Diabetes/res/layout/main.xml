@@ -8,13 +8,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Diabetes Calculator"
+            android:text="@string/dia_calc"
             android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Average Glucose"
+            android:text="@string/avg_glu"
             android:id="@+id/textView2"/>
     <EditText
             android:layout_width="163dp"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="A1C Score"
+            android:text="@string/a1c_score"
             android:id="@+id/textView3"/>
     <EditText
             android:layout_width="164dp"
@@ -42,17 +42,17 @@
         <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ADAG Formula (eAG = (1.583 * A1c - 2.52) * 18.05)"
+                android:text="@string/adag_form"
                 android:id="@+id/rdoADAG" android:checked="true"/>
         <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DCCT Formula (eAG = (A1c *35.6) - 77.3)"
+                android:text="@string/dcct_form"
                 android:id="@+id/rdoDCCT" android:checked="false"/>
     </RadioGroup>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Go to Sugar Log"
+            android:text="@string/go_sugar_log"
             android:id="@+id/btnSwitch"/>
 </LinearLayout>

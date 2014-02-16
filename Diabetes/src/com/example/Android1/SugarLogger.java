@@ -73,10 +73,10 @@ public class SugarLogger extends Activity {
           FileOutputStream out = openFileOutput(FILENAME, Context.MODE_APPEND);
           out.write( entry.getBytes());
           out.close();
-          Toast.makeText(SugarLogger.this,"Success!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(SugarLogger.this,getString(R.string.success), Toast.LENGTH_SHORT).show();
         } catch (Exception e){
           e.printStackTrace();
-          Toast.makeText(SugarLogger.this,"F@#k, it Fails!", Toast.LENGTH_SHORT).show();
+          Toast.makeText(SugarLogger.this,getString(R.string.failure), Toast.LENGTH_SHORT).show();
         }
       }
 
