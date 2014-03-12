@@ -5,6 +5,9 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +34,32 @@ public class SugarLogger extends Activity {
   private Button btnAdd;
   final Calendar c = Calendar.getInstance();
 
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu){
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+      case R.id.action_main:
+        Intent switchToMain = new Intent(this, MyActivity.class);
+        startActivity(switchToMain);
+        break;
+      case R.id.action_sugar:
+//        Intent switchToSugar = new Intent(this, SugarLogger.class);
+//        startActivity(switchToSugar);
+        break;
+      case R.id.action_alarm:
+       Intent switchToAlarms = new Intent(this, Alarms.class);
+       startActivity(switchToAlarms);
+        break;
+      default:break;
+    }
+    return true;
+  }
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

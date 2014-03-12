@@ -3,12 +3,8 @@ package com.example.Android1;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import java.text.DecimalFormat;
 
@@ -28,6 +24,34 @@ public class MyActivity extends Activity {
     setContentView(R.layout.main);
     initializeApp();
   }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu){
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.main, menu);
+    return true;
+  }
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+      case R.id.action_main:
+//        Intent switchToMain = new Intent(this, MyActivity.class);
+//        startActivity(switchToMain);
+        break;
+      case R.id.action_sugar:
+        Intent switchActivity = new Intent(this, SugarLogger.class);
+        startActivity(switchActivity);
+        break;
+      case R.id.action_alarm:
+        Intent switchToAlarms = new Intent(this, Alarms.class);
+        startActivity(switchToAlarms);
+        break;
+      default:break;
+    }
+
+    return true;
+  }
+
   private void initializeApp(){
     averageGlucose = (EditText) findViewById(R.id.averageGlucose);
     a1c = (EditText) findViewById(R.id.a1c);
@@ -101,5 +125,6 @@ public class MyActivity extends Activity {
       }
     }
     );
+
   }
 }

@@ -54,5 +54,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/go_sugar_log"
-            android:id="@+id/btnSwitch"/>
+            android:id="@+id/btnSwitch" android:enabled="false" android:visibility="gone"/>
 </LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_main"
+          android:title="@string/menu_main"
+          android:showAsAction="always"
+            />
+    <item android:id="@+id/action_sugar"
+          android:title="@string/go_sugar_log"
+          android:showAsAction="always"
+            />
+    <item android:id="@+id/action_alarm"
+          android:title="@string/go_alarms"
+          android:showAsAction="always"
+            />
+</menu>

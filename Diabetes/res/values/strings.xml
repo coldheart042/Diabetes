@@ -6,7 +6,8 @@
     <string name="a1c_score">A1C Score</string>
     <string name="adag_form">ADAG Formula (eAG = (1.583 * A1c - 2.52) * 18.05)</string>
     <string name="dcct_form">DCCT Formula (eAG = (A1c *35.6) - 77.3)</string>
-    <string name="go_sugar_log">Go to Sugar Log</string>
+    <string name="go_sugar_log">Sugar Log</string>
+    <string name="go_alarms">Alarms</string>
     <string name="date">Date:</string>
     <string name="time">Time:</string>
     <string name="before_meal">Before Meal</string>
@@ -22,4 +23,6 @@
     <string name="submit">Submit</string>
     <string name="success">Success!</string>
     <string name="failure">Failed!</string>
+    <string name="menu_main">Calculator</string>
+    <string name="add_alarm">Add alarm</string>
 </resources>
