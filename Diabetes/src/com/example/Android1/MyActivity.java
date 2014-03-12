@@ -18,8 +18,6 @@ public class MyActivity extends Activity {
   private RadioButton rdoADAG;
   private RadioButton rdoDCCT;
   private Button btnSwitch;
-  private Button btnSwitchToAlarm;
-  private Button btnSwitchToCalc;
 
   /**
    * Called when the activity is first created.
@@ -36,7 +34,6 @@ public class MyActivity extends Activity {
     rdoADAG = (RadioButton) findViewById(R.id.rdoADAG);
     rdoDCCT = (RadioButton) findViewById(R.id.rdoDCCT);
     btnSwitch = (Button) findViewById(R.id.btnSwitch);
-    btnSwitchToAlarm = (Button) findViewById(R.id.btnSwitchToAlarm);
 
     // Event Handlers: onFocus
     averageGlucose.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -77,7 +74,6 @@ public class MyActivity extends Activity {
         return handled;
       }
     });
-
     a1c.setOnEditorActionListener(new TextView.OnEditorActionListener() {
       @Override
       public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -98,7 +94,6 @@ public class MyActivity extends Activity {
         return handled;
       }
     });
-
     btnSwitch.setOnClickListener(new View.OnClickListener(){
       public void onClick(View v){
         Intent switchActivity = new Intent(v.getContext() ,SugarLogger.class);
@@ -106,12 +101,5 @@ public class MyActivity extends Activity {
       }
     }
     );
-
-    btnSwitchToAlarm.setOnClickListener(new View.OnClickListener(){
-      public void onClick(View v){
-        Intent switchActivity = new Intent(v.getContext() , SugarAlarm.class);
-        startActivity(switchActivity);
-      }
-    });
   }
 }
