@@ -25,6 +25,4 @@
     <string name="failure">Failed!</string>
     <string name="menu_main">Calculator</string>
     <string name="add_alarm">Add alarm</string>
-    <string name="delete">Delete</string>
-    <string name="alarms_load">Press and hold an alarm to edit...</string>
 </resources>
