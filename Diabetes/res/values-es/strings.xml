@@ -25,4 +25,6 @@
     <string name="failure">Fracasado!</string>
     <string name="menu_main">Calculadora</string>
     <string name="add_alarm">Agregar alarma</string>
+    <string name="delete">Borrar</string>
+    <string name="alarms_load">Pulse y mantenga una alarma para editar ...</string>
 </resources>
