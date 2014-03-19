@@ -14,11 +14,219 @@
             <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
-                <Button
+                <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/add_alarm"
-                        android:id="@+id/btnAddAlarm"/>
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/textView1" android:text="@string/alarm1" android:labelFor="@+id/txtAlarm1"/>
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="time|date"
+                        android:ems="10"
+                        android:id="@+id/txtAlarm1"/>
+                <ToggleButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/togAlarm1" android:checked="false" android:hint="1"/>
+            </TableRow>
+            <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/notes"
+                        android:id="@+id/textView"/>
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtNotes1"/>
+                <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/repeat"
+                        android:id="@+id/chkAlarm1" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent" android:id="@+id/tableRow">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView2"
+                          android:text="@string/alarm2" android:labelFor="@+id/txtAlarm2"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm2"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:checked="false" android:id="@+id/togAlarm2" android:hint="2"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow2">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView3"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes2"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm2" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow3">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView4"
+                          android:text="@string/alarm3" android:labelFor="@+id/txtAlarm3"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm3"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm3" android:checked="false" android:hint="3"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow4">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView5"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes3"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm3" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow5">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView6"
+                          android:text="@string/alarm4" android:labelFor="@+id/txtNotes4"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm4"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm4" android:checked="false" android:hint="4"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow6">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView7"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes4"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm4" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow7">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView8"
+                          android:text="@string/alarm5" android:labelFor="@+id/txtAlarm5"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm5"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm5" android:checked="false" android:hint="5"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow8">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView9"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes5"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm5" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow9">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView10"
+                          android:text="@string/alarm6" android:labelFor="@+id/txtAlarm6"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm6"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm6" android:checked="false" android:hint="6"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow10">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView11"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes6"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm6" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow11">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView12"
+                          android:text="@string/alarm7" android:labelFor="@+id/txtAlarm7"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm7"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm7" android:checked="false" android:hint="7"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow12">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView13"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes7"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm7" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow13">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView14"
+                          android:text="@string/alarm8" android:labelFor="@+id/txtAlarm8"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm8"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm8" android:checked="false" android:hint="8"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow14">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView15"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes8"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm8" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow15">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView16"
+                          android:text="@string/alarm9" android:labelFor="@+id/txtAlarm9" android:singleLine="true"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm9"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm9" android:checked="false" android:hint="9"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow16">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView17"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes9"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm9" android:checked="false"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow17">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView18"
+                          android:text="@string/alarm10" android:labelFor="@+id/txtAlarm10"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:inputType="time|date" android:ems="10" android:id="@+id/txtAlarm10"/>
+                <ToggleButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:id="@+id/togAlarm10" android:checked="false" android:hint="10"/>
+            </TableRow>
+            <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent"
+                      android:id="@+id/tableRow18">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/notes"
+                          android:id="@+id/textView19"/>
+                <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/txtNotes10"/>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/repeat" android:id="@+id/chkAlarm10" android:checked="false"/>
             </TableRow>
         </TableLayout>
     </ScrollView>

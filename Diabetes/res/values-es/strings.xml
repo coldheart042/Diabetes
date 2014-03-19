@@ -24,5 +24,15 @@
     <string name="success">éxito!</string>
     <string name="failure">Fracasado!</string>
     <string name="menu_main">Calculadora</string>
-    <string name="add_alarm">Agregar alarma</string>
+    <string name="alarm1">Alarma 1</string>
+    <string name="alarm2">Alarma 2</string>
+    <string name="alarm3">Alarma 3</string>
+    <string name="alarm4">Alarma 4</string>
+    <string name="alarm5">Alarma 5</string>
+    <string name="alarm6">Alarma 6</string>
+    <string name="alarm7">Alarma 7</string>
+    <string name="alarm8">Alarma 8</string>
+    <string name="alarm9">Alarma 9</string>
+    <string name="alarm10">Alarma 10</string>
+    <string name="repeat">Repita?</string>
 </resources>
