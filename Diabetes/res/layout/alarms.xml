@@ -24,7 +24,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="time|date"
                         android:ems="10"
-                        android:id="@+id/txtAlarm1"/>
+                        android:id="@+id/txtAlarm1"
+                        android:editable="false"/>
                 <ToggleButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

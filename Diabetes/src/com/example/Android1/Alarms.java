@@ -1,26 +1,42 @@
 package com.example.Android1;
 
-import android.app.Activity;
-import android.app.PendingIntent;
+import android.app.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursorDriver;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQuery;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ToggleButton;
+import android.widget.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Richard on 3/11/14.
  */
 public class Alarms extends Activity {
 
-  private ArrayList<PendingIntent>pendingIntents = new ArrayList<PendingIntent>(10);
-  // Daisy chained controls are the best I can do to clean up my code :(  I tried to set an ArrayList...
+  private ArrayList<PendingIntent>pendingIntents = new ArrayList<PendingIntent>();
+  private ArrayList<ToggleButton>toggleButtons = new ArrayList<ToggleButton>();
+  private ArrayList<EditText>editTexts = new ArrayList<EditText>();
+  private ArrayList<EditText>editNotes = new ArrayList<EditText>();
+  private ArrayList<CheckBox>checkBoxes = new ArrayList<CheckBox>();
   // All ToggleButtons
   private ToggleButton tog1,tog2,tog3,tog4,tog5,tog6,tog7,tog8,tog9,tog10;
         // All DateTime Texts
@@ -30,6 +46,11 @@ public class Alarms extends Activity {
         // All CheckBoxes
   private CheckBox cb1,cb2,cb3,cb4,cb5,cb6,cb7,cb8,cb9,cb10;
   // Whew, now that's over, time to set them...
+  private Calendar c;
+  private BroadcastReceiver br;
+  private AlarmManager am;
+  SimpleDateFormat sdf;
+  Intent alarmIntent;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu){
@@ -62,6 +83,29 @@ public class Alarms extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.alarms);
     initializeView();
+
+  }
+
+  @Override
+  public void onPause(){
+    super.onPause();
+    // Saves the settings to csv file.
+    String FILENAME = "Alarms.csv";
+    String entry = "";
+    for (int i= 0; i < 10; i++){
+      String dateTime = String.valueOf(editTexts.get(i).getText());
+      String isOn = String.valueOf(toggleButtons.get(i).isChecked());
+      String isRecurring = String.valueOf(checkBoxes.get(i).isChecked());
+      String notes = String.valueOf(editNotes.get(i).getText());
+      entry += dateTime + "," + isOn + "," + isRecurring + "," + notes + "\n";
+    }
+    try {
+      FileOutputStream out = openFileOutput(FILENAME,Context.MODE_PRIVATE);
+      out.write( entry.getBytes());
+      out.close();
+    } catch (Exception e){
+      e.printStackTrace();
+    }
   }
 
   private void initializeView(){
@@ -84,7 +128,28 @@ public class Alarms extends Activity {
     tog9.setOnClickListener(togOCL);
     tog10.setOnClickListener(togOCL);
     // Set onClick listeners for EditTexts
-
+    ea1.setOnClickListener(edtOCL);
+    ea2.setOnClickListener(edtOCL);
+    ea3.setOnClickListener(edtOCL);
+    ea4.setOnClickListener(edtOCL);
+    ea5.setOnClickListener(edtOCL);
+    ea6.setOnClickListener(edtOCL);
+    ea7.setOnClickListener(edtOCL);
+    ea8.setOnClickListener(edtOCL);
+    ea9.setOnClickListener(edtOCL);
+    ea10.setOnClickListener(edtOCL);
+    pushToArrays();
+    // Set calendar and the text of the alarm editTexts
+    c = Calendar.getInstance();
+    sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+    for(EditText editText : editTexts)
+      if (String.valueOf(editText.getText()).equals("")) editText.setText(sdf.format(c.getTime()));
+    br = new BroadcastReceiver() {
+      @Override
+      public void onReceive(Context context, Intent intent) {
+        Toast.makeText(Alarms.this,"Wake Up: ", Toast.LENGTH_LONG).show();
+      }
+    };
   }
 
   // OnClickListener for ToggleButtons
@@ -92,20 +157,113 @@ public class Alarms extends Activity {
     @Override
     public void onClick(View view) {
       ToggleButton toggleButton = (ToggleButton)view;
+      int index = toggleButtons.indexOf(toggleButton);
+      // Register the receiver and create intents for passing information
+      String dateTime = String.valueOf(editTexts.get(index).getText());
+      Calendar c = parseDateTime(dateTime);
+      registerReceiver(br, new IntentFilter("com.example.Android1"));
+
+      am = (AlarmManager)(Alarms.this.getSystemService(Context.ALARM_SERVICE));
       if (toggleButton.isChecked()){
-        createAlarm();
+        alarmIntent = new Intent("com.example.Android1");
+        if (!String.valueOf(editNotes.get(index).getText()).equals("")){
+          alarmIntent.putExtra("notes",String.valueOf(editNotes.get(index).getText()));
+        }
+        PendingIntent pi =  PendingIntent.getBroadcast(Alarms.this, index, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        pendingIntents.add(pi);
+        if (checkBoxes.get(index).isChecked()){
+          am.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+        }
+        else{
+          am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+        }
       }
       else{
-        disposeAlarm();
+        int piIndex = pendingIntents.indexOf(PendingIntent.getBroadcast(Alarms.this, index, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT))+ 1;
+        pendingIntents.get(piIndex).cancel();
+        pendingIntents.remove(piIndex);
       }
     }
   };
 
-  public void createAlarm(){
-    // Code to add alarm
+  // OnClickListener for EditTexts
+  public View.OnClickListener edtOCL = new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+      final EditText editText = (EditText)view;
+      final Calendar e = Calendar.getInstance();
+      final TimePickerDialog t = new TimePickerDialog(Alarms.this,new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+          e.set(Calendar.HOUR, hour);
+          e.set(Calendar.MINUTE, minute);
+          setText(editText, e);
+        }
+      },c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE),false);
+      DatePickerDialog d = new DatePickerDialog(Alarms.this,new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+          e.set(year,month,day);
+          t.show();
+        }
+      },c.get(Calendar.YEAR),c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+      d.show();
+    }
+  };
+  public void setText(EditText editText, Calendar c){
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+    editText.setText(sdf.format(c.getTime()));
+  }
+  // Pushes the appropriate controls to their ArrayLists for easy indexing
+  public void pushToArrays(){
+    toggleButtons.add(tog1);
+    toggleButtons.add(tog2);
+    toggleButtons.add(tog3);
+    toggleButtons.add(tog4);
+    toggleButtons.add(tog5);
+    toggleButtons.add(tog6);
+    toggleButtons.add(tog7);
+    toggleButtons.add(tog8);
+    toggleButtons.add(tog9);
+    toggleButtons.add(tog10);
+    editTexts.add(ea1);
+    editTexts.add(ea2);
+    editTexts.add(ea3);
+    editTexts.add(ea4);
+    editTexts.add(ea5);
+    editTexts.add(ea6);
+    editTexts.add(ea7);
+    editTexts.add(ea8);
+    editTexts.add(ea9);
+    editTexts.add(ea10);
+    editNotes.add(en1);
+    editNotes.add(en2);
+    editNotes.add(en3);
+    editNotes.add(en4);
+    editNotes.add(en5);
+    editNotes.add(en6);
+    editNotes.add(en7);
+    editNotes.add(en8);
+    editNotes.add(en9);
+    editNotes.add(en10);
+    checkBoxes.add(cb1);
+    checkBoxes.add(cb2);
+    checkBoxes.add(cb3);
+    checkBoxes.add(cb4);
+    checkBoxes.add(cb5);
+    checkBoxes.add(cb6);
+    checkBoxes.add(cb7);
+    checkBoxes.add(cb8);
+    checkBoxes.add(cb9);
+    checkBoxes.add(cb10);
   }
 
-  public void disposeAlarm(){
-    // Code to remove alarm
+  public Calendar parseDateTime(String dateTime){
+    Calendar c = Calendar.getInstance();
+    c.setTime(sdf.parse(dateTime, new ParsePosition(0)));
+    if (Calendar.getInstance().after(c)){
+      c = Calendar.getInstance();
+    }
+    return c;
   }
 }
