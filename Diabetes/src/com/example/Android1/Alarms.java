@@ -5,27 +5,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteCursorDriver;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQuery;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Richard on 3/11/14.
@@ -83,7 +73,7 @@ public class Alarms extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.alarms);
     initializeView();
-
+    setFields();
   }
 
   @Override
@@ -96,7 +86,7 @@ public class Alarms extends Activity {
       String dateTime = String.valueOf(editTexts.get(i).getText());
       String isOn = String.valueOf(toggleButtons.get(i).isChecked());
       String isRecurring = String.valueOf(checkBoxes.get(i).isChecked());
-      String notes = String.valueOf(editNotes.get(i).getText());
+      String notes = String.valueOf(editNotes.get(i).getText()+ " ");
       entry += dateTime + "," + isOn + "," + isRecurring + "," + notes + "\n";
     }
     try {
@@ -139,17 +129,75 @@ public class Alarms extends Activity {
     ea9.setOnClickListener(edtOCL);
     ea10.setOnClickListener(edtOCL);
     pushToArrays();
+
     // Set calendar and the text of the alarm editTexts
     c = Calendar.getInstance();
     sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm");
-    for(EditText editText : editTexts)
-      if (String.valueOf(editText.getText()).equals("")) editText.setText(sdf.format(c.getTime()));
+    for(EditText editText : editTexts) {
+      if (String.valueOf(editText.getText()).equals("")) {
+        editText.setText(sdf.format(c.getTime()));
+      }
+    }
     br = new BroadcastReceiver() {
       @Override
       public void onReceive(Context context, Intent intent) {
-        Toast.makeText(Alarms.this,"Wake Up: ", Toast.LENGTH_LONG).show();
+        Toast.makeText(Alarms.this,"Alarm went off!", Toast.LENGTH_LONG).show();
+        String notes = "";
+        if(intent.hasExtra("notes")){
+          notes = intent.getStringExtra("notes");
+        }
+        createNotifications(notes);
       }
     };
+  }
+
+  public void setFields(){
+    String csvFile = "Alarms.csv";
+    BufferedReader br = null;
+    String line = "";
+    String cvsSplitBy = ",";
+
+    try {
+
+      br = new BufferedReader(new FileReader(csvFile));
+      int index = 0;
+      while ((line = br.readLine()) != null) {
+
+        // use comma as separator to populate fields.
+        String[] settings = line.split(cvsSplitBy);
+        editTexts.get(index).setText(settings[0]);
+        toggleButtons.get(index).setChecked(Boolean.valueOf(settings[1]));
+        checkBoxes.get(index).setChecked(Boolean.valueOf(settings[2]));
+        editNotes.get(index).setText(settings[3]);
+        index++;
+      }
+
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      if (br != null) {
+        try {
+          br.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
+
+  private void createNotifications(String notes){
+    Intent intent = new Intent(this,Alarms.class);
+    PendingIntent pendingIntent = PendingIntent.getActivity(this,11,intent,0);
+    Notification n = new Notification.Builder( this )
+        .setContentTitle("Alarm:")
+        .setContentText(notes)
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentIntent(pendingIntent)
+        .setAutoCancel(true).build();
+    NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+    notificationManager.notify(0,n);
   }
 
   // OnClickListener for ToggleButtons
@@ -161,6 +209,7 @@ public class Alarms extends Activity {
       // Register the receiver and create intents for passing information
       String dateTime = String.valueOf(editTexts.get(index).getText());
       Calendar c = parseDateTime(dateTime);
+
       registerReceiver(br, new IntentFilter("com.example.Android1"));
 
       am = (AlarmManager)(Alarms.this.getSystemService(Context.ALARM_SERVICE));
@@ -192,6 +241,7 @@ public class Alarms extends Activity {
     public void onClick(View view) {
       final EditText editText = (EditText)view;
       final Calendar e = Calendar.getInstance();
+      c = e;
       final TimePickerDialog t = new TimePickerDialog(Alarms.this,new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
