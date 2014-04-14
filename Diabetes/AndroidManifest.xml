@@ -19,5 +19,6 @@
         <activity android:name=".SugarLogger"/>
         <activity android:name=".SugarChart"/>
         <activity android:name=".Alarms"/>
+        <activity android:name=".About"/>
     </application>
 </manifest>

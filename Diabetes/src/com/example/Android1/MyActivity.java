@@ -46,6 +46,10 @@ public class MyActivity extends Activity {
         Intent switchToAlarms = new Intent(this, Alarms.class);
         startActivity(switchToAlarms);
         break;
+      case R.id.action_about:
+        Intent intent = new Intent(this,About.class);
+        startActivity(intent);
+        break;
       default:break;
     }
 
