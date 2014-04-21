@@ -36,6 +36,10 @@ public class About extends Activity {
         Intent switchToAlarms = new Intent();
         startActivity(switchToAlarms);
         break;
+      case R.id.action_preferences:
+        Intent switchtosettings = new Intent(this,Preferences.class);
+        startActivity(switchtosettings);
+        break;
       default:break;
     }
     return true;
@@ -46,12 +50,12 @@ public class About extends Activity {
     setContentView(R.layout.about);
   }
   public void about_click(View view){
-    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://diabetes-about.azurewebsites.net"));
+    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://diabetes-about.azurewebsites.net/About.aspx"));
     //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")); - Used for testing the intent
     startActivity(browserIntent);
   }
   public void support_click(View view){
-    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://diabetes-support.azurewebsites.net"));
+    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://diabetes-support.azurewebsites.net/Support.aspx"));
     startActivity(browserIntent);
   }
 }

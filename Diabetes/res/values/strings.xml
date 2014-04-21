@@ -35,4 +35,13 @@
     <string name="alarm9">Alarm 9</string>
     <string name="alarm10">Alarm 10</string>
     <string name="repeat">Repeat?</string>
+    <string name="doc_email">Doctor Email</string>
+    <string name="userEmail">User Email</string>
+    <string name="subject">Subject</string>
+    <string name="docNotes">Notes to doctor</string>
+    <string name="email_doc">Email Doctor</string>
+    <string name="pref_adag">I prefer to use the ADAG algorithm</string>
+    <string name="pref_dcct">I prefer to use the DCCT algorithm</string>
+    <string name="logStart">Sugar log Start Date</string>
+    <string name="logEnd">Sugar log End Date</string>
 </resources>

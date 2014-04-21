@@ -20,5 +20,6 @@
         <activity android:name=".SugarChart"/>
         <activity android:name=".Alarms"/>
         <activity android:name=".About"/>
+        <activity android:name=".Preferences"/>
     </application>
 </manifest>

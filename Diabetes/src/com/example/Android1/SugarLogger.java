@@ -60,6 +60,10 @@ public class SugarLogger extends Activity {
         Intent intent = new Intent(this,About.class);
         startActivity(intent);
         break;
+      case R.id.action_preferences:
+        Intent switchtosettings = new Intent(this,Preferences.class);
+        startActivity(switchtosettings);
+        break;
       default:break;
     }
     return true;

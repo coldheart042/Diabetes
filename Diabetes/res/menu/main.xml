@@ -17,4 +17,7 @@
           android:title="About"
           android:showAsAction="always"
             />
+    <item android:id="@+id/action_preferences"
+          android:title="Settings"
+          android:showAsAction="always"/>
 </menu>

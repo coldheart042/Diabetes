@@ -35,4 +35,13 @@
     <string name="alarm9">Alarma 9</string>
     <string name="alarm10">Alarma 10</string>
     <string name="repeat">Repita?</string>
+    <string name="doc_email">Médico de correo electrónico</string>
+    <string name="userEmail">usuario Email</string>
+    <string name="subject">sujeto</string>
+    <string name="docNotes">Notas para el médico</string>
+    <string name="email_doc">Email médico</string>
+    <string name="pref_adag">Yo prefiero usar el algoritmo ADAG</string>
+    <string name="pref_dcct">Yo prefiero usar el algoritmo DCCT</string>
+    <string name="logStart">Trazas de Sugar fecha de inicio</string>
+    <string name="logEnd">Fecha final del registro de Azúcar</string>
 </resources>

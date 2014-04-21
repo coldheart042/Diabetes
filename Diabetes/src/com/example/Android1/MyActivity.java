@@ -1,7 +1,9 @@
 package com.example.Android1;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -50,6 +52,10 @@ public class MyActivity extends Activity {
         Intent intent = new Intent(this,About.class);
         startActivity(intent);
         break;
+      case R.id.action_preferences:
+        Intent switchtosettings = new Intent(this,Preferences.class);
+        startActivity(switchtosettings);
+        break;
       default:break;
     }
 
@@ -57,10 +63,13 @@ public class MyActivity extends Activity {
   }
 
   private void initializeApp(){
+    SharedPreferences sharedPreferences = getSharedPreferences("diabetesPref", Context.MODE_PRIVATE);
     averageGlucose = (EditText) findViewById(R.id.averageGlucose);
     a1c = (EditText) findViewById(R.id.a1c);
     rdoADAG = (RadioButton) findViewById(R.id.rdoADAG);
+    rdoADAG.setChecked(sharedPreferences.getBoolean("ADAG", false));
     rdoDCCT = (RadioButton) findViewById(R.id.rdoDCCT);
+    rdoDCCT.setChecked(sharedPreferences.getBoolean("DCCT", false));
     btnSwitch = (Button) findViewById(R.id.btnSwitch);
 
     // Event Handlers: onFocus
