@@ -61,16 +61,16 @@ public class Alarms extends Activity {
         startActivity(switchToSugar);
         break;
       case R.id.action_alarm:
-//        Intent switchToAlarms = new Intent();
-//        startActivity(switchToAlarms);
-        break;
-      case R.id.action_about:
-        Intent intent = new Intent(this,About.class);
-        startActivity(intent);
+        Intent switchToAlarms = new Intent();
+        startActivity(switchToAlarms);
         break;
       case R.id.action_preferences:
         Intent switchtosettings = new Intent(this,Preferences.class);
         startActivity(switchtosettings);
+        break;
+      case R.id.action_map:
+        Intent switchToMap = new Intent(this, Map.class);
+        startActivity(switchToMap);
         break;
       default:break;
     }

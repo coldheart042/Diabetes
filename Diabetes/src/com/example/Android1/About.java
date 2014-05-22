@@ -40,6 +40,10 @@ public class About extends Activity {
         Intent switchtosettings = new Intent(this,Preferences.class);
         startActivity(switchtosettings);
         break;
+      case R.id.action_map:
+        Intent switchToMap = new Intent(this, Map.class);
+        startActivity(switchToMap);
+        break;
       default:break;
     }
     return true;

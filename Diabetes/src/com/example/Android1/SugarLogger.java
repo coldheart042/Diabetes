@@ -49,20 +49,20 @@ public class SugarLogger extends Activity {
         startActivity(switchToMain);
         break;
       case R.id.action_sugar:
-//        Intent switchToSugar = new Intent(this, SugarLogger.class);
-//        startActivity(switchToSugar);
+        Intent switchToSugar = new Intent(this, SugarLogger.class);
+        startActivity(switchToSugar);
         break;
       case R.id.action_alarm:
-       Intent switchToAlarms = new Intent(this, Alarms.class);
-       startActivity(switchToAlarms);
-        break;
-      case R.id.action_about:
-        Intent intent = new Intent(this,About.class);
-        startActivity(intent);
+        Intent switchToAlarms = new Intent();
+        startActivity(switchToAlarms);
         break;
       case R.id.action_preferences:
         Intent switchtosettings = new Intent(this,Preferences.class);
         startActivity(switchtosettings);
+        break;
+      case R.id.action_map:
+        Intent switchToMap = new Intent(this, Map.class);
+        startActivity(switchToMap);
         break;
       default:break;
     }
