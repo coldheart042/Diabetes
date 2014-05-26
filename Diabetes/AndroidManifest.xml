@@ -6,13 +6,13 @@
 
     <!-- Required permissions for map itself-->
     <permission
-            android:name="info.androidhive.googlemapsv2.permission.MAPS_RECEIVE"
+            android:name="com.example.Android1.permission.MAPS_RECEIVE"
             android:protectionLevel="signature" />
 
-    <uses-permission android:name="info.androidhive.googlemapsv2.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.example.Android1.permission.MAPS_RECEIVE" />
 
 
-    <uses-sdk android:minSdkVersion="19"/>
+    <uses-sdk android:minSdkVersion="16"/>
 
     <!-- Required permissions for map data-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -54,7 +54,7 @@
         <!-- Google API Key ( Maps and Places... I think )-->
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyCCiP-NWht7QHIQ7zCTiRyOK8NBMSrG5O0" />
+                android:value="AIzaSyCAbyj3H0o30LQloOafZWhvkpn2-PzJ6VA" />
 
     </application>
 </manifest>

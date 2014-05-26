@@ -1,14 +1,16 @@
 package com.example.Android1;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 
 /**
  * Created by Richard on 5/21/14.
@@ -16,11 +18,12 @@ import com.google.android.gms.maps.MapFragment;
 public class Map extends Activity {
 
   private GoogleMap googleMap;
+
+
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.map);
   }
-
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu){
